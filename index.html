@@ -272,65 +272,19 @@ button{ font-family: inherit; cursor: pointer; }
 
 @media (max-width: 480px){ .nav__logo-img{ height: 42px; } }
 
-/* ---------- Nav ---------- */
-
-.nav{
-
-  position: sticky;
-
-  top: 0;
-
-  z-index: 100;
-
-  background: var(--navy);
-
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-
-}
-
-.nav__inner{
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  height: 76px;
-
-}
-
-.nav__brand{
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
-
-  color: var(--white);
-
-}
-
-.nav__logo-img{ height: 52px; width: auto; display: block; }
-
-@media (max-width: 480px){ .nav__logo-img{ height: 42px; } }
-
 .nav__links{
 
   display: flex;
 
   align-items: center;
 
-  gap: 18px;
+  gap: 28px;
 
 }
 
-.nav__links > a,
+.nav__links a{
 
-.nav__item > .nav__dropbtn{
-
-  font-size: 13px;
+  font-size: 14px;
 
   font-weight: 600;
 
@@ -338,131 +292,15 @@ button{ font-family: inherit; cursor: pointer; }
 
   padding: 8px 2px;
 
-  border: 0;
-
   border-bottom: 2px solid transparent;
-
-  background: transparent;
-
-  font-family: var(--font-body);
-
-  text-decoration: none;
 
   transition: color 0.15s ease, border-color 0.15s ease;
 
 }
 
-.nav__links > a:hover,
+.nav__links a:hover{ color: var(--white); }
 
-.nav__item > .nav__dropbtn:hover{ color: var(--white); }
-
-.nav__links > a.is-active{ color: var(--white); border-bottom-color: var(--red); }
-
-.nav__item{
-
-  position: relative;
-
-  display: flex;
-
-  align-items: center;
-
-}
-
-.nav__dropbtn{
-
-  cursor: pointer;
-
-  white-space: nowrap;
-
-}
-
-.nav__chevron{
-
-  display: inline-block;
-
-  margin-left: 5px;
-
-  font-size: 11px;
-
-  transition: transform 0.15s ease;
-
-}
-
-.nav__item.is-open .nav__chevron{ transform: rotate(180deg); }
-
-.nav__dropdown{
-
-  position: absolute;
-
-  top: calc(100% + 8px);
-
-  left: 50%;
-
-  transform: translateX(-50%) translateY(-6px);
-
-  min-width: 190px;
-
-  padding: 8px;
-
-  background: var(--white);
-
-  border: 1px solid var(--border);
-
-  border-radius: var(--radius);
-
-  box-shadow: var(--shadow-md);
-
-  opacity: 0;
-
-  visibility: hidden;
-
-  pointer-events: none;
-
-  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
-
-}
-
-.nav__item:hover .nav__dropdown,
-
-.nav__item.is-open .nav__dropdown,
-
-.nav__item:focus-within .nav__dropdown{
-
-  opacity: 1;
-
-  visibility: visible;
-
-  pointer-events: auto;
-
-  transform: translateX(-50%) translateY(0);
-
-}
-
-.nav__dropdown a{
-
-  display: block;
-
-  padding: 10px 12px;
-
-  border-radius: var(--radius-sm);
-
-  color: var(--navy);
-
-  font-size: 13.5px;
-
-  font-weight: 600;
-
-  white-space: nowrap;
-
-}
-
-.nav__dropdown a:hover{
-
-  background: var(--chalk);
-
-  color: var(--red);
-
-}
+.nav__links a.is-active{ color: var(--white); border-bottom-color: var(--red); }
 
 .nav__actions{ display: flex; align-items: center; gap: 14px; }
 
@@ -483,16 +321,6 @@ button{ font-family: inherit; cursor: pointer; }
   color: var(--white);
 
   font-size: 20px;
-
-}
-
-@media (max-width: 1100px){
-
-  .nav__links{ gap: 12px; }
-
-  .nav__links > a,
-
-  .nav__item > .nav__dropbtn{ font-size: 12px; }
 
 }
 
@@ -522,99 +350,13 @@ button{ font-family: inherit; cursor: pointer; }
 
     border-bottom: 1px solid rgba(255,255,255,0.08);
 
-    max-height: calc(100vh - 76px);
-
-    overflow-y: auto;
-
   }
 
   .nav__links.is-open{ display: flex; }
 
-  .nav__links > a,
+  .nav__links a{ width: 100%; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
 
-  .nav__item{
-
-    width: 100%;
-
-  }
-
-  .nav__links > a,
-
-  .nav__item > .nav__dropbtn{
-
-    width: 100%;
-
-    padding: 12px 0;
-
-    text-align: left;
-
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-
-    font-size: 14px;
-
-  }
-
-  .nav__links > a.is-active{ border-bottom-color: rgba(255,255,255,0.08); }
-
-  .nav__dropdown{
-
-    position: static;
-
-    transform: none;
-
-    min-width: 0;
-
-    width: 100%;
-
-    padding: 0 0 6px 14px;
-
-    background: transparent;
-
-    border: 0;
-
-    border-radius: 0;
-
-    box-shadow: none;
-
-    opacity: 1;
-
-    visibility: visible;
-
-    pointer-events: auto;
-
-    display: none;
-
-  }
-
-  .nav__item.is-open .nav__dropdown{ display: block; }
-
-  .nav__item:hover .nav__dropdown,
-
-  .nav__item:focus-within .nav__dropdown{
-
-    transform: none;
-
-  }
-
-  .nav__dropdown a{
-
-    color: rgba(255,255,255,0.78);
-
-    padding: 10px 12px;
-
-    border-radius: var(--radius-sm);
-
-    font-size: 13.5px;
-
-  }
-
-  .nav__dropdown a:hover{
-
-    background: rgba(255,255,255,0.08);
-
-    color: var(--white);
-
-  }
+  .nav__links a.is-active{ border-bottom-color: rgba(255,255,255,0.08); }
 
   .nav__toggle{ display: inline-flex; align-items: center; justify-content: center; }
 
@@ -1110,6 +852,188 @@ button{ font-family: inherit; cursor: pointer; }
 
 }
 
+/* ---------- Nuevos menús desplegables: Programs / Locations ---------- */
+
+.nav-dropdown{ position:relative; }
+
+.nav-dropdown__main{ display:inline-flex; align-items:center; gap:4px; }
+
+.nav-dropdown__menu{
+
+  position:absolute;
+
+  top:calc(100% + 8px);
+
+  left:0;
+
+  min-width:190px;
+
+  background:var(--white);
+
+  border-radius:var(--radius-sm);
+
+  box-shadow:var(--shadow-md);
+
+  padding:8px 0;
+
+  display:none;
+
+  z-index:200;
+
+}
+
+.nav-dropdown:hover .nav-dropdown__menu,
+
+.nav-dropdown.is-open .nav-dropdown__menu{ display:block; }
+
+.nav-dropdown__menu a{
+
+  display:block;
+
+  width:100%;
+
+  padding:10px 16px;
+
+  color:var(--navy);
+
+  border:0;
+
+  font-size:14px;
+
+  white-space:nowrap;
+
+}
+
+.nav-dropdown__menu a:hover{
+
+  color:var(--red);
+
+  background:var(--chalk);
+
+}
+
+@media (max-width:900px){
+
+  .nav-dropdown{ width:100%; }
+
+  .nav-dropdown__main{ width:100%; padding:12px 0; }
+
+  .nav-dropdown__menu{
+
+    position:static;
+
+    min-width:0;
+
+    width:100%;
+
+    background:rgba(255,255,255,0.06);
+
+    box-shadow:none;
+
+    border-radius:0;
+
+    padding:0 0 4px 14px;
+
+  }
+
+  .nav-dropdown__menu a{ color:rgba(255,255,255,0.78); padding:10px 0; }
+
+  .nav-dropdown__menu a:hover{ color:var(--white); background:transparent; }
+
+}
+
+}
+
+  .houston-popup__dialog .section{ padding:48px 0; }
+
+  .houston-popup__dialog{ max-height:96vh; border-radius:14px; }
+
+  .houston-popup{ padding:8px; }
+
+@media (max-width:620px){
+
+body.houston-popup-open{ overflow:hidden; }
+
+.houston-popup__dialog .section:last-child{ padding-bottom:56px; }
+
+.houston-popup__dialog .hero{ border-radius:var(--radius-lg) var(--radius-lg) 0 0; }
+
+}
+
+  box-shadow:var(--shadow-md);
+
+  line-height:1;
+
+  font-size:24px;
+
+  color:var(--white);
+
+  background:var(--navy);
+
+  border-radius:50%;
+
+  border:0;
+
+  height:42px;
+
+  width:42px;
+
+  margin:14px 14px 0 0;
+
+  z-index:20;
+
+  float:right;
+
+  top:14px;
+
+  position:sticky;
+
+.houston-popup__close{
+
+}
+
+  overscroll-behavior:contain;
+
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
+
+  border-radius:var(--radius-lg);
+
+  background:var(--white);
+
+  overflow:auto;
+
+  max-height:92vh;
+
+  width:min(1180px, 100%);
+
+  position:relative;
+
+.houston-popup__dialog{
+
+.houston-popup.is-open{ display:flex; }
+
+}
+
+  padding:24px;
+
+  justify-content:center;
+
+  align-items:center;
+
+  display:none;
+
+  z-index:1000;
+
+  background:rgba(0,10,46,.78);
+
+  inset:0;
+
+  position:fixed;
+
+.houston-popup{
+
+/* ---------- Popup Liga Houston integrado en Locations ---------- */
+
 </style>
 
 </head>
@@ -1128,53 +1052,57 @@ button{ font-family: inherit; cursor: pointer; }
 
     <nav class="nav__links" id="navLinks">
 
+<div class="nav-dropdown">
+
+  <a href="programas.html" class="nav-dropdown__main">Programs ▾</a>
+
+  <div class="nav-dropdown__menu">
+
+    <a href="camps.html">Camps</a>
+
+    <a href="recreational.html">Recreational</a>
+
+    <a href="competitive.html">Competitive</a>
+
+    <a href="elite.html">Elite</a>
+
+  </div>
+
+</div>
+
+<div class="nav-dropdown">
+
+  <a href="locations.html" class="nav-dropdown__main">Locations ▾</a>
+
+  <div class="nav-dropdown__menu">
+
+    <a href="#houston-popup" class="js-open-houston">Houston</a>
+
+    <a href="sede-katy.html">Katy</a>
+
+    <a href="woodlands.html">Woodlands</a>
+
+    <a href="tomball.html">Tomball</a>
+
+    <a href="rosenberg.html">Rosenberg</a>
+
+  </div>
+
+</div>
+
+<a href="tournaments.html">Tournaments</a>
+
+<a href="tryouts.html">Tryouts</a>
+
+<a href="college-ranking.html">College Ranking</a>
+
       <a href="index.html" class="is-active">Inicio</a>
 
-      <div class="nav__item nav__item--dropdown">
-
-        <button type="button" class="nav__dropbtn" aria-expanded="false">Programs <span class="nav__chevron">▾</span></button>
-
-        <div class="nav__dropdown" role="menu">
-
-          <a href="programas.html#camps" role="menuitem">Camps</a>
-
-          <a href="programas.html#recreational" role="menuitem">Recreational</a>
-
-          <a href="programas.html#competitive" role="menuitem">Competitive</a>
-
-          <a href="programas.html#elite" role="menuitem">Elite</a>
-
-        </div>
-
-      </div>
-
-      <div class="nav__item nav__item--dropdown">
-
-        <button type="button" class="nav__dropbtn" aria-expanded="false">Locations <span class="nav__chevron">▾</span></button>
-
-        <div class="nav__dropdown" role="menu">
-
-          <a href="liga-gran-houston.html#houston" role="menuitem">Houston</a>
-
-          <a href="sede-katy.html" role="menuitem">Katy</a>
-
-          <a href="liga-gran-houston.html#woodlands" role="menuitem">Woodlands</a>
-
-          <a href="liga-gran-houston.html#tomball" role="menuitem">Tomball</a>
-
-          <a href="liga-gran-houston.html#rosenberg" role="menuitem">Rosenberg</a>
-
-        </div>
-
-      </div>
-
-      <a href="torneos.html">Tournaments</a>
-
-      <a href="tryouts.html">Tryouts</a>
-
-      <a href="college-ranking.html">College Ranking</a>
+      <a href="programas.html">Programas</a>
 
       <a href="precios-inscripcion.html">Precios</a>
+
+      <a href="sede-katy.html">Sede Katy</a>
 
       <a href="liga-gran-houston.html">Liga Houston</a>
 
@@ -1498,6 +1426,191 @@ button{ font-family: inherit; cursor: pointer; }
 
 </section>
 
+</div>
+
+  </div>
+
+
+</section>
+
+  </div>
+
+    </div>
+
+      </div>
+
+        <p style="color:var(--slate)">Un miembro del staff de Liga se pondrá en contacto para confirmar el pago y el calendario.</p>
+
+        <h3 style="text-transform:none;font-size:20px;margin-bottom:8px">¡Equipo registrado!</h3>
+
+        <div class="wizard__success-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+
+      <div id="equipo-success" hidden class="wizard__success">
+
+      </form>
+
+        <button type="submit" class="btn btn--red btn--block">Inscribir equipo</button>
+
+        </div>
+
+          </div>
+
+            <div class="field__error">Selecciona una categoría.</div>
+
+            </select>
+
+              <option>Femenil</option>
+
+              <option>Coed</option>
+
+              <option>50–60 años</option>
+
+              <option>35–49 años</option>
+
+              <option>19–34 años</option>
+
+              <option>15–18 años</option>
+
+              <option>12–14 años</option>
+
+              <option>9–11 años</option>
+
+              <option>6–8 años</option>
+
+              <option value="">Selecciona…</option>
+
+            <select id="equipo-categoria" required>
+
+          <div class="field"><label for="equipo-categoria">Categoría / división</label>
+
+          <div class="field"><label for="capitan-telefono">Teléfono</label><input type="tel" id="capitan-telefono" required><div class="field__error">Ingresa un teléfono.</div></div>
+
+        <div class="form-row">
+
+        </div>
+
+          <div class="field"><label for="capitan-correo">Correo electrónico</label><input type="email" id="capitan-correo" required><div class="field__error">Ingresa un correo válido.</div></div>
+
+          <div class="field"><label for="capitan-nombre">Nombre del capitán o entrenador</label><input type="text" id="capitan-nombre" required><div class="field__error">Ingresa el nombre del responsable.</div></div>
+
+        <div class="form-row">
+
+        </div>
+
+          <div class="field"><label for="equipo-ciudad">Ciudad / zona de origen</label><input type="text" id="equipo-ciudad" required><div class="field__error">Ingresa la ciudad o zona.</div></div>
+
+          <div class="field"><label for="equipo-nombre">Nombre del equipo</label><input type="text" id="equipo-nombre" required><div class="field__error">Ingresa el nombre del equipo.</div></div>
+
+        <div class="form-row">
+
+      <form class="form" data-simple-form data-success-target="#equipo-success">
+
+    <div class="card" style="max-width:640px;margin:0 auto">
+
+    </div>
+
+      <h2>Inscribe a tu equipo en la Liga</h2>
+
+      <p class="kicker" style="justify-content:center">Registro de equipo</p>
+
+    <div class="section__head section__head--center">
+
+  <div class="container">
+
+<section class="section section--alt" id="inscribir-equipo">
+
+
+</section>
+
+  </div>
+
+    </div>
+
+      <div class="step"><div class="step__num">4</div><div><h4>Confirma tu lugar</h4><p>Recibe tu calendario de Liga y sede de partidos.</p></div></div>
+
+      <div class="step"><div class="step__num">3</div><div><h4>Paga la cuota de temporada</h4><p>$650 por equipo, por temporada.</p></div></div>
+
+      <div class="step"><div class="step__num">2</div><div><h4>Agrega tu roster</h4><p>Suma a los jugadores que formarán parte del equipo en la temporada.</p></div></div>
+
+      <div class="step"><div class="step__num">1</div><div><h4>Crea la cuenta de tu equipo</h4><p>Registra al equipo con los datos del capitán o entrenador responsable.</p></div></div>
+
+    <div class="steps">
+
+    </div>
+
+      <h2>Cómo inscribir a tu equipo</h2>
+
+      <p class="kicker">Proceso</p>
+
+    <div class="section__head">
+
+  <div class="container">
+
+<section class="section">
+
+
+</section>
+
+  </div>
+
+    </div>
+
+      <p class="section__lede"><span class="ph">fechas específicas de las 3 temporadas anuales — pendientes de confirmar</span></p>
+
+      <h2>Calendario de temporadas</h2>
+
+      <p class="kicker">Calendario</p>
+
+    <div class="section__head">
+
+  <div class="container">
+
+<section class="section section--alt">
+
+
+</section>
+
+  </div>
+
+    </div>
+
+      <div class="stat"><span class="stat__value mono-stat">GHA</span><span class="stat__label">Equipos de toda la Gran Houston</span></div>
+
+      <div class="stat"><span class="stat__value mono-stat">$650</span><span class="stat__label">Por equipo, por temporada</span></div>
+
+      <div class="stat"><span class="stat__value mono-stat">06</span><span class="stat__label">Torneos regionales</span></div>
+
+      <div class="stat"><span class="stat__value mono-stat">03</span><span class="stat__label">Temporadas al año</span></div>
+
+    <div class="stats-strip">
+
+  <div class="container">
+
+<section class="section">
+
+
+</section>
+
+  </div>
+
+    <p class="hero__lede">La Liga Lone Star recibe equipos de cualquier ciudad o suburbio de la Gran Houston. Tres temporadas al año, formato entre semana y fin de semana, y seis torneos que cierran el año con el mejor flag football de la región.</p>
+
+    <h1 id="houston-popup-title">Tu equipo puede jugar sin importar en qué parte de Houston esté</h1>
+
+    <div class="hero__accent-rule"></div>
+
+  <div class="container hero__content">
+
+  <svg class="hero__star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.568L24 9.423l-6 5.847L19.335 24 12 19.897 4.665 24 6 15.27 0 9.423l8.332-1.268z"/></svg>
+
+<section class="hero hero--page">
+
+    <button type="button" class="houston-popup__close" id="houston-popup-close" aria-label="Cerrar Liga Houston">×</button>
+
+  <div class="houston-popup__dialog" role="dialog" aria-modal="true" aria-labelledby="houston-popup-title">
+
+<div class="houston-popup" id="houston-popup" aria-hidden="true">
+
 <footer class="footer">
 
   <div class="container">
@@ -1588,6 +1701,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   initGenericForms();
 
+ initDropdownMenus();
+
+  initHoustonPopup();
+
   initWizard();
 
 });
@@ -1602,19 +1719,13 @@ function initNavToggle() {
 
   if (!toggle || !links) return;
 
-  toggle.addEventListener('click', function () { var isOpen = links.classList.toggle('is-open'); toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false'); });
+  toggle.addEventListener('click', function () {
 
-  document.querySelectorAll('.nav__item--dropdown').forEach(function (item) {
+    var isOpen = links.classList.toggle('is-open');
 
-    var button = item.querySelector('.nav__dropbtn');
-
-    button.addEventListener('click', function (event) { event.stopPropagation(); var open = item.classList.toggle('is-open'); button.setAttribute('aria-expanded', open ? 'true' : 'false'); document.querySelectorAll('.nav__item--dropdown').forEach(function (other) { if (other !== item) { other.classList.remove('is-open'); var b = other.querySelector('.nav__dropbtn'); if (b) b.setAttribute('aria-expanded', 'false'); } }); });
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 
   });
-
-  document.addEventListener('click', function (event) { if (!event.target.closest('.nav__item--dropdown')) document.querySelectorAll('.nav__item--dropdown').forEach(function (item) { item.classList.remove('is-open'); var b = item.querySelector('.nav__dropbtn'); if (b) b.setAttribute('aria-expanded', 'false'); }); });
-
-  document.addEventListener('keydown', function (event) { if (event.key === 'Escape') document.querySelectorAll('.nav__item--dropdown').forEach(function (item) { item.classList.remove('is-open'); var b = item.querySelector('.nav__dropbtn'); if (b) b.setAttribute('aria-expanded', 'false'); }); });
 
 }
 
@@ -1857,6 +1968,90 @@ function initWizard() {
   }
 
 }
+
+/* ---------- Menús desplegables nuevos ---------- */
+
+function initDropdownMenus() {
+
+ var dropdowns = document.querySelectorAll('.nav-dropdown');
+
+ dropdowns.forEach(function (dropdown) {
+
+   var main = dropdown.querySelector('.nav-dropdown__main');
+
+   if (!main) return;
+
+   main.addEventListener('click', function (event) {
+
+     if (window.innerWidth <= 900) {
+
+       event.preventDefault();
+
+       dropdowns.forEach(function (other) { if (other !== dropdown) other.classList.remove('is-open'); });
+
+       dropdown.classList.toggle('is-open');
+
+     }
+
+   });
+
+ });
+
+ document.addEventListener('click', function (event) {
+
+   if (!event.target.closest('.nav-dropdown')) {
+
+     dropdowns.forEach(function (dropdown) { dropdown.classList.remove('is-open'); });
+
+   }
+
+ });
+
+}
+
+}
+
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") closePopup(); });
+
+  popup.addEventListener("click", function(e){ if(e.target === popup) closePopup(); });
+
+  closeBtn.addEventListener("click", closePopup);
+
+  openBtns.forEach(function(btn){ btn.addEventListener("click", openPopup); });
+
+  }
+
+    document.body.classList.remove("houston-popup-open");
+
+    popup.setAttribute("aria-hidden","true");
+
+    popup.classList.remove("is-open");
+
+  function closePopup(){
+
+  }
+
+    document.body.classList.add("houston-popup-open");
+
+    popup.setAttribute("aria-hidden","false");
+
+    popup.classList.add("is-open");
+
+    if(e) e.preventDefault();
+
+  function openPopup(e){
+
+  if (!popup || !closeBtn) return;
+
+  var openBtns = document.querySelectorAll(".js-open-houston");
+
+  var closeBtn = document.getElementById("houston-popup-close");
+
+  var popup = document.getElementById("houston-popup");
+
+function initHoustonPopup() {
+
+/* ---------- Popup Liga Houston ---------- */
 
 </script>
 
