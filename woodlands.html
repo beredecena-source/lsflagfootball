@@ -8,7 +8,6 @@
 
    ========================================================================== */
 
-
 :root{
 
   --navy: #001449;
@@ -37,20 +36,17 @@
 
   --success-bg: #E8F6EF;
 
-
   --radius-sm: 6px;
 
   --radius: 12px;
 
   --radius-lg: 20px;
 
-
   --font-display: 'Anton', 'Arial Narrow', sans-serif;
 
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
   --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-
 
   --container: 1140px;
 
@@ -59,7 +55,6 @@
   --shadow-md: 0 6px 24px rgba(0,20,73,0.14);
 
 }
-
 
 *, *::before, *::after{ box-sizing: border-box; }
 
@@ -93,7 +88,6 @@ p{ margin: 0; }
 
 button{ font-family: inherit; cursor: pointer; }
 
-
 :focus-visible{
 
   outline: 3px solid var(--red);
@@ -102,13 +96,11 @@ button{ font-family: inherit; cursor: pointer; }
 
 }
 
-
 @media (prefers-reduced-motion: reduce){
 
   *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 
 }
-
 
 .container{
 
@@ -121,7 +113,6 @@ button{ font-family: inherit; cursor: pointer; }
   padding: 0 24px;
 
 }
-
 
 .kicker{
 
@@ -161,7 +152,6 @@ button{ font-family: inherit; cursor: pointer; }
 
 }
 
-
 .mono-stat{
 
   font-family: var(--font-mono);
@@ -171,7 +161,6 @@ button{ font-family: inherit; cursor: pointer; }
   font-weight: 500;
 
 }
-
 
 /* ---------- Buttons ---------- */
 
@@ -221,7 +210,6 @@ button{ font-family: inherit; cursor: pointer; }
 
 .btn:disabled{ opacity: 0.5; cursor: not-allowed; transform: none; }
 
-
 /* ---------- Navigation ---------- */
 
 .nav{
@@ -266,7 +254,6 @@ button{ font-family: inherit; cursor: pointer; }
 
 @media (max-width: 480px){ .nav__logo-img{ height: 42px; } }
 
-
 .nav__links{
 
   display: flex;
@@ -297,7 +284,6 @@ button{ font-family: inherit; cursor: pointer; }
 
 .nav__links a.is-active{ color: var(--white); border-bottom-color: var(--red); }
 
-
 .nav__actions{ display: flex; align-items: center; gap: 14px; }
 
 .nav__toggle{
@@ -319,7 +305,6 @@ button{ font-family: inherit; cursor: pointer; }
   font-size: 20px;
 
 }
-
 
 @media (max-width: 900px){
 
@@ -360,7 +345,6 @@ button{ font-family: inherit; cursor: pointer; }
   .nav__actions .btn{ display: none; }
 
 }
-
 
 /* ---------- Hero ---------- */
 
@@ -424,7 +408,6 @@ button{ font-family: inherit; cursor: pointer; }
 
 .hero__meta-item span:last-child{ display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.65); margin-top: 2px; }
 
-
 /* ---------- Sections ---------- */
 
 .section{ padding: 84px 0; }
@@ -444,7 +427,6 @@ button{ font-family: inherit; cursor: pointer; }
 .section__lede{ font-size: 17px; color: var(--slate); }
 
 .section--navy .section__lede{ color: rgba(255,255,255,0.75); }
-
 
 /* ---------- Cards ---------- */
 
@@ -467,7 +449,6 @@ button{ font-family: inherit; cursor: pointer; }
   .grid--2, .grid--3, .grid--4{ grid-template-columns: 1fr; }
 
 }
-
 
 .card{
 
@@ -517,9 +498,7 @@ button{ font-family: inherit; cursor: pointer; }
 
 .card--navy .card__icon{ background: rgba(228,0,27,0.20); color: var(--red); }
 
-
 .card__cta{ margin-top: 16px; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: var(--red); }
-
 
 /* ---------- Pricing ---------- */
 
@@ -543,7 +522,6 @@ button{ font-family: inherit; cursor: pointer; }
 
 .price-card__note{ font-size: 14px; color: rgba(255,255,255,0.82); margin-bottom: 20px; }
 
-
 .price-table{ width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
 
 .price-table th, .price-table td{ text-align: left; padding: 18px 22px; border-bottom: 1px solid var(--border); }
@@ -553,7 +531,6 @@ button{ font-family: inherit; cursor: pointer; }
 .price-table td:last-child, .price-table th:last-child{ font-family: var(--font-mono); font-weight: 500; color: var(--navy); text-align: right; }
 
 .price-table tr:last-child td{ border-bottom: none; }
-
 
 /* ---------- Stats ---------- */
 
@@ -570,7 +547,6 @@ button{ font-family: inherit; cursor: pointer; }
 .stat__label{ font-size: 14px; color: var(--slate); margin-top: 4px; display: block; }
 
 .section--navy .stat__label{ color: rgba(255,255,255,0.7); }
-
 
 /* ---------- Placeholder ---------- */
 
@@ -593,7 +569,6 @@ button{ font-family: inherit; cursor: pointer; }
   padding: 2px 8px;
 
 }
-
 
 /* ---------- Steps / numbered lists ---------- */
 
@@ -643,7 +618,6 @@ button{ font-family: inherit; cursor: pointer; }
 
 .step p{ color: var(--slate); font-size: 14.5px; }
 
-
 /* ---------- Final CTA ---------- */
 
 .cta-final{
@@ -669,7 +643,6 @@ button{ font-family: inherit; cursor: pointer; }
 .cta-final__meta-item{ display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: rgba(255,255,255,0.85); }
 
 .cta-final__meta-item .dot{ width: 8px; height: 8px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
-
 
 /* ---------- Forms ---------- */
 
@@ -711,11 +684,9 @@ button{ font-family: inherit; cursor: pointer; }
 
 .field.has-error .field__error{ display: block; }
 
-
 .btn--outline-navy{ background: transparent; border-color: var(--border); color: var(--navy); }
 
 .btn--outline-navy:hover{ border-color: var(--navy); background: var(--chalk); }
-
 
 .program-option{
 
@@ -746,7 +717,6 @@ button{ font-family: inherit; cursor: pointer; }
 .program-option strong{ font-size: 14.5px; color: var(--navy); }
 
 .program-option small{ font-family: var(--font-mono); font-size: 13px; color: var(--slate); }
-
 
 /* ---------- Registration Wizard ---------- */
 
@@ -798,7 +768,6 @@ button{ font-family: inherit; cursor: pointer; }
 
 .wizard__note{ font-size: 13px; color: var(--slate-light); margin-top: 18px; padding-top: 18px; border-top: 1px dashed var(--border); }
 
-
 /* ---------- Footer ---------- */
 
 .footer{ background: var(--navy-dark); color: rgba(255,255,255,0.75); padding: 64px 0 32px; }
@@ -822,7 +791,6 @@ button{ font-family: inherit; cursor: pointer; }
 .footer a:hover{ color: var(--red); }
 
 .footer__bottom{ border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 13px; color: rgba(255,255,255,0.45); }
-
 
 /* ---------- Utilities ---------- */
 
@@ -865,8 +833,6 @@ button{ font-family: inherit; cursor: pointer; }
   padding: 24px;
 
 }
-
-
 
 /* ---------- Main menu: Programs / Locations ---------- */
 
@@ -982,7 +948,6 @@ button{ font-family: inherit; cursor: pointer; }
 
 }
 
-
 </style>
 
 <style>
@@ -1028,6 +993,8 @@ button{ font-family: inherit; cursor: pointer; }
         <p>31101 FM 2978, Magnolia, TX 77354, United States</p>
 
         <p style="margin-top:18px"><a class="btn btn--red" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/dir/?api=1&destination=31101+FM+2978%2C+Magnolia%2C+TX+77354">Get Directions</a></p>
+
+        <p style="margin-top:14px"><a class="btn btn--navy" target="_blank" rel="noopener noreferrer" href="https://waze.com/ul?q=31101%20FM%202978%2C%20Magnolia%2C%20TX%2077354&navigate=yes">🧭 Navigate with Waze</a></p>
 
         <p style="margin-top:14px"><a href="https://www.google.com/maps/search/?api=1&query=31101+FM+2978%2C+Magnolia%2C+TX+77354" target="_blank" rel="noopener noreferrer">Open in Google Maps</a></p>
 
