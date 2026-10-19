@@ -2181,89 +2181,85 @@ return precios[valor] || '—';
 
 }
 
-}
-
+  
 /* ---------- Menús desplegables nuevos ---------- */
 
+
 function initDropdownMenus() {
+  var dropdowns = document.querySelectorAll('.nav-dropdown');
 
-var dropdowns = document.querySelectorAll('.nav-dropdown');
+  dropdowns.forEach(function (dropdown) {
+    var main = dropdown.querySelector('.nav-dropdown__main');
+    if (!main) return;
 
-dropdowns.forEach(function (dropdown) {
+    main.addEventListener('click', function (event) {
+      event.preventDefault();
 
-var main = dropdown.querySelector('.nav-dropdown__main');
+      var wasOpen = dropdown.classList.contains('is-open');
 
-if (!main) return;
+      dropdowns.forEach(function (other) {
+        other.classList.remove('is-open');
+        var trigger = other.querySelector('.nav-dropdown__main');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      });
 
-main.addEventListener('click', function (event) {
+      if (!wasOpen) {
+        dropdown.classList.add('is-open');
+        main.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
 
-if (window.innerWidth <= 900) {
-
-event.preventDefault();
-
-dropdowns.forEach(function (other) { if (other !== dropdown) other.classList.remove('is-open'); });
-
-dropdown.classList.toggle('is-open');
-
+  document.addEventListener('click', function (event) {
+    if (!event.target.closest('.nav-dropdown')) {
+      dropdowns.forEach(function (dropdown) {
+        dropdown.classList.remove('is-open');
+        var trigger = dropdown.querySelector('.nav-dropdown__main');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
 }
-
-});
-
-});
-
-document.addEventListener('click', function (event) {
-
-if (!event.target.closest('.nav-dropdown')) {
-
-dropdowns.forEach(function (dropdown) { dropdown.classList.remove('is-open'); });
-
-}
-
-});
-
-}
-
-}
-
-document.addEventListener("keydown", function(e){ if(e.key === "Escape") closePopup(); });
-
-popup.addEventListener("click", function(e){ if(e.target === popup) closePopup(); });
-
-closeBtn.addEventListener("click", closePopup);
-
-openBtns.forEach(function(btn){ btn.addEventListener("click", openPopup); });
-
-}
-
-document.body.classList.remove("houston-popup-open");
-
-popup.setAttribute("aria-hidden","true");
-
-popup.classList.remove("is-open");
-
-function closePopup(){
-
-}
-
-document.body.classList.add("houston-popup-open");
-
-popup.setAttribute("aria-hidden","false");
-
-popup.classList.add("is-open");
-
-if(e) e.preventDefault();
-
-function openPopup(e){
-
-if (!popup || !closeBtn) return;
-
-var openBtns = document.querySelectorAll(".js-open-houston");
-
-var closeBtn = document.getElementById("houston-popup-close");
-
-var popup = document.getElementById("houston-popup");
 
 function initHoustonPopup() {
+  var popup = document.getElementById('houston-popup');
+  var closeBtn = document.getElementById('houston-popup-close');
+  var openBtns = document.querySelectorAll('.js-open-houston');
+
+  if (!popup || !closeBtn) return;
+
+  function openPopup(event) {
+    if (event) event.preventDefault();
+    popup.classList.add('is-open');
+    popup.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('houston-popup-open');
+  }
+
+  function closePopup() {
+    popup.classList.remove('is-open');
+    popup.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('houston-popup-open');
+  }
+
+  openBtns.forEach(function (button) {
+    button.addEventListener('click', openPopup);
+  });
+
+  closeBtn.addEventListener('click', closePopup);
+
+  popup.addEventListener('click', function (event) {
+    if (event.target === popup) closePopup();
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') closePopup();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  initDropdownMenus();
+  initHoustonPopup();
+});
 
 /* ---------- Popup League Houston ---------- */
 
