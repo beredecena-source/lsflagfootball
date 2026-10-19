@@ -1267,7 +1267,34 @@ table { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrollin
   .price-card__value { font-size: clamp(36px, 11vw, 52px); }
 
 }
+/* Ajustes generales para celulares en posición vertical */
+@media screen and (max-width: 600px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
 
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  img,
+  video,
+  iframe {
+    max-width: 100%;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    max-width: 100%;
+  }
+}
 </style>
 
 </head>
