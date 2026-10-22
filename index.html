@@ -914,7 +914,7 @@ button{ font-family: inherit; cursor: pointer; }
 
   position:absolute;
 
-  top:calc(100% + 8px);
+  top:100%;
 
   left:0;
 
@@ -1247,52 +1247,36 @@ document.addEventListener('DOMContentLoaded', function () {
     // Abrir los submenús en celular
 
 document.querySelectorAll('.nav-dropdown__main').forEach(function (link) {
+
     link.addEventListener('click', function (event) {
+
+        if (window.matchMedia('(min-width: 901px)').matches) return;
+
         // El elemento principal abre el desplegable; las opciones llevan a sus páginas.
+
         event.preventDefault();
 
         const dropdown = link.closest('.nav-dropdown');
+
         if (!dropdown) return;
 
         const wasOpen = dropdown.classList.contains('is-open');
 
         dropdowns.forEach(function (item) {
+
             item.classList.remove('is-open');
+
         });
 
         if (!wasOpen) {
+
             dropdown.classList.add('is-open');
+
         }
+
     });
+
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     // Cerrar los submenús al pulsar fuera de ellos
 
