@@ -1,3 +1,4 @@
+
 <!doctype html>
 
  
@@ -1891,192 +1892,54 @@ padding:0 0 4px 14px;
  
 
 .nav-dropdown__menu a:hover{ color:var(--white); background:transparent; }
-
- 
-
 }
 
- 
-
-}
-
- 
-
-.houston-popup__dialog .section{ padding:48px 0; }
-
- 
-
-.houston-popup__dialog{ max-height:96vh; border-radius:14px; }
-
- 
-
-.houston-popup{ padding:8px; }
-
- 
-
-@media (max-width:620px){
-
- 
-
-body.houston-popup-open{ overflow:hidden; }
-
- 
-
-.houston-popup__dialog .section:last-child{ padding-bottom:56px; }
-
- 
-
-.houston-popup__dialog .hero{ border-radius:var(--radius-lg) var(--radius-lg) 0 0; }
-
- 
-
-}
-
- 
-
-box-shadow:var(--shadow-md);
-
- 
-
-line-height:1;
-
- 
-
-font-size:24px;
-
- 
-
-color:var(--white);
-
- 
-
-background:var(--navy);
-
- 
-
-border-radius:50%;
-
- 
-
-border:0;
-
- 
-
-height:42px;
-
- 
-
-width:42px;
-
- 
-
-margin:14px 14px 0 0;
-
- 
-
-z-index:20;
-
- 
-
-float:right;
-
- 
-
-top:14px;
-
- 
-
-position:sticky;
-
- 
-
-.houston-popup__close{
-
- 
-
-}
-
- 
-
-overscroll-behavior:contain;
-
- 
-
-box-shadow:0 20px 60px rgba(0,0,0,.35);
-
- 
-
-border-radius:var(--radius-lg);
-
- 
-
-background:var(--white);
-
- 
-
-overflow:auto;
-
- 
-
-max-height:92vh;
-
- 
-
-width:min(1180px, 100%);
-
- 
-
-position:relative;
-
- 
-
-.houston-popup__dialog{
-
- 
-
-.houston-popup.is-open{ display:flex; }
-
- 
-
-}
-
- 
-
-padding:24px;
-
- 
-
-justify-content:center;
-
- 
-
-align-items:center;
-
- 
-
-display:none;
-
- 
-
-z-index:1000;
-
- 
-
-background:rgba(0,10,46,.78);
-
- 
-
-inset:0;
-
- 
-
-position:fixed;
-
- 
-
+/* ---------- Popup League Houston ---------- */
 .houston-popup{
-
- 
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  z-index:1000;
+  background:rgba(0,10,46,.78);
+}
+.houston-popup.is-open{ display:flex; }
+.houston-popup__dialog{
+  position:relative;
+  width:min(1180px, 100%);
+  max-height:92vh;
+  overflow:auto;
+  overscroll-behavior:contain;
+  background:var(--white);
+  border-radius:var(--radius-lg);
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+.houston-popup__close{
+  position:sticky;
+  top:14px;
+  float:right;
+  margin:14px 14px 0 0;
+  width:42px;
+  height:42px;
+  z-index:20;
+  border:0;
+  border-radius:50%;
+  color:var(--white);
+  background:var(--navy);
+  font-size:24px;
+  line-height:1;
+  box-shadow:var(--shadow-md);
+}
+.houston-popup__dialog .section{ padding:48px 0; }
+.houston-popup__dialog{ max-height:96vh; border-radius:14px; }
+.houston-popup{ padding:8px; }
+@media (max-width:620px){
+  body.houston-popup-open{ overflow:hidden; }
+  .houston-popup__dialog .section:last-child{ padding-bottom:56px; }
+  .houston-popup__dialog .hero{ border-radius:var(--radius-lg) var(--radius-lg) 0 0; }
+}
 
 /* ---------- Popup League Houston integrado en Locations ---------- */
 
