@@ -5122,13 +5122,15 @@ const collegePrograms = [{"country":"United States","college":"Agnes Scott (GA)"
 
     function updateControls() {
 
-      const hasExistingVote = Boolean(existingVote);
+      // Se puede cambiar la selección en cualquier momento.
+
+      // Vote se activa si hay un equipo seleccionado distinto del voto guardado.
 
       select.disabled = false;
 
-      button.disabled = hasExistingVote || !select.value;
+      button.disabled = !select.value || select.value === existingVote;
 
-      clearButton.disabled = !hasExistingVote;
+      clearButton.disabled = !existingVote;
 
     }
 
@@ -5138,7 +5140,7 @@ const collegePrograms = [{"country":"United States","college":"Agnes Scott (GA)"
 
       select.value = existingVote;
 
-      message.textContent = `You have already voted for ${existingVote} on this browser. To vote again, click Clear my vote.`;
+      message.textContent = `Your saved vote is ${existingVote}. Select another team to change your vote, or click Clear my vote to remove it.`;
 
     } else {
 
@@ -5152,17 +5154,21 @@ const collegePrograms = [{"country":"United States","college":"Agnes Scott (GA)"
 
     select.addEventListener('change', function () {
 
-      if (existingVote) {
+      if (existingVote && select.value === existingVote) {
 
-        message.textContent = `Your saved vote is ${existingVote}. Click Clear my vote before voting again.`;
+        message.textContent = `Your current vote is ${existingVote}. Select a different team to change your vote.`;
+
+      } else if (select.value) {
+
+        message.textContent = existingVote
+
+          ? `You selected ${select.value}. Click Vote to change your vote from ${existingVote} to ${select.value}.`
+
+          : `You selected ${select.value}. Click Vote to submit your vote.`;
 
       } else {
 
-        message.textContent = select.value
-
-          ? `You selected ${select.value}. Click Vote to submit your vote.`
-
-          : 'Choose a team, then click Vote.';
+        message.textContent = 'Choose a team, then click Vote.';
 
       }
 
@@ -5175,18 +5181,6 @@ const collegePrograms = [{"country":"United States","college":"Agnes Scott (GA)"
     form.addEventListener('submit', function (event) {
 
       event.preventDefault();
-
- 
-
-      if (existingVote) {
-
-        message.textContent = `You have already voted for ${existingVote}. Click Clear my vote before voting again.`;
-
-        updateControls();
-
-        return;
-
-      }
 
  
 
@@ -5204,9 +5198,37 @@ const collegePrograms = [{"country":"United States","college":"Agnes Scott (GA)"
 
  
 
-      const previousCount = Number(votes[chosen] || 0);
+      if (chosen === existingVote) {
 
-      votes[chosen] = previousCount + 1;
+        message.textContent = 'Your vote is already recorded for this team. Select a different team to change it.';
+
+        updateControls();
+
+        return;
+
+      }
+
+ 
+
+      const oldVote = existingVote;
+
+      const oldVoteCount = oldVote ? Number(votes[oldVote] || 0) : 0;
+
+      const chosenOldCount = Number(votes[chosen] || 0);
+
+ 
+
+      // Replace the prior vote (if any), rather than counting two votes from one browser.
+
+      if (oldVote) {
+
+        if (oldVoteCount > 1) votes[oldVote] = oldVoteCount - 1;
+
+        else delete votes[oldVote];
+
+      }
+
+      votes[chosen] = chosenOldCount + 1;
 
  
 
@@ -5218,15 +5240,23 @@ const collegePrograms = [{"country":"United States","college":"Agnes Scott (GA)"
 
         existingVote = chosen;
 
-        message.textContent = `Thank you! Your vote for ${chosen} has been recorded in this browser. Click Clear my vote if you want to change it.`;
+        message.textContent = `Your vote has been saved for ${chosen}. You can select another team and click Vote to change it again.`;
 
       } catch (e) {
 
-        votes[chosen] = previousCount;
+        // Restore the in-memory counts if the browser cannot save.
 
-        if (votes[chosen] === 0) delete votes[chosen];
+        if (oldVote) votes[oldVote] = oldVoteCount;
 
-        message.textContent = 'Your browser could not save the vote. Check your browser settings and try again.';
+        else delete votes[oldVote];
+
+        if (chosenOldCount > 0) votes[chosen] = chosenOldCount;
+
+        else delete votes[chosen];
+
+        existingVote = oldVote;
+
+        message.textContent = 'Your vote could not be saved. Check your browser settings and try again.';
 
       }
 
