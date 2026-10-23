@@ -1910,7 +1910,41 @@ button{ font-family: inherit; cursor: pointer; }
 
  
 
-</style></head><body><header class="nav"><div class="container nav__inner">
+</style>
+
+/* Footer links arranged horizontally by category */
+
+.footer__grid{
+
+  display:grid;
+
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+
+  gap:32px;
+
+  align-items:start;
+
+}
+
+.footer__grid > .footer__brand{grid-column:1 / -1;}
+
+@media (max-width: 760px){
+
+  .footer__grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
+
+  .footer__grid > .footer__brand{grid-column:1 / -1;}
+
+}
+
+@media (max-width: 520px){
+
+  .footer__grid{grid-template-columns:1fr 1fr;gap:20px;}
+
+  .footer__grid > .footer__brand{grid-column:1 / -1;}
+
+}
+
+</head><body><header class="nav"><div class="container nav__inner">
 
  
 
@@ -2025,7 +2059,6 @@ button{ font-family: inherit; cursor: pointer; }
 </tbody></table></div></div></div>
 
 <style>@media(max-width:760px){.tournament-season-layout{grid-template-columns:1fr!important}.tournament-calendar-mini table{font-size:13px!important}}</style>
-
 
  
 
