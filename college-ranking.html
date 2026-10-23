@@ -2165,7 +2165,7 @@ button{ font-family: inherit; cursor: pointer; }
 .vote-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:end}
 .vote-form label{display:flex;flex-direction:column;gap:8px;font-weight:700;color:var(--navy)}
 .vote-form select{width:100%;min-height:48px;border:1px solid #cbd4df;border-radius:8px;padding:10px 12px;background:#fff;color:var(--ink);font:inherit}
-.vote-form .btn{min-height:48px}
+.vote-form .btn{min-height:48px} .vote-actions{display:flex;gap:8px;align-items:stretch} .vote-clear{background:#fff!important;color:var(--navy)!important;border:1px solid #cbd4df!important} .vote-clear:hover{background:#f3f5f8!important} .vote-clear:disabled{opacity:.5;cursor:not-allowed} @media(max-width:620px){.vote-actions{flex-wrap:wrap}.vote-actions .btn{flex:1}}
 .vote-message{grid-column:1/-1;color:var(--slate);font-size:14px;min-height:22px}
 .vote-results{margin-top:26px;border-top:1px solid var(--border);padding-top:22px}
 .vote-results h3{font-size:22px;margin-bottom:14px}
@@ -2343,7 +2343,7 @@ button{ font-family: inherit; cursor: pointer; }
             <option value="">Select a college team</option>
           </select>
         </label>
-        <button class="btn btn--red" type="submit" id="collegeVoteButton">Vote</button>
+        <div class="vote-actions"><button class="btn btn--red" type="submit" id="collegeVoteButton">Vote</button><button class="btn vote-clear" type="button" id="collegeVoteClearButton">Clear my vote</button></div>
         <p class="vote-message" id="collegeVoteMessage" role="status" aria-live="polite">Choose your favorite college team and click Vote.</p>
       </form>
       <div class="vote-results">
@@ -2504,6 +2504,7 @@ const collegePrograms = [{"country":"United States","college":"Agnes Scott (GA)"
     const message = document.getElementById('collegeVoteMessage');
     const results = document.getElementById('collegeVoteTopFive');
     const button = document.getElementById('collegeVoteButton');
+    const clearButton = document.getElementById('collegeVoteClearButton');
     if (!select || !form || !results || !Array.isArray(window.collegePrograms) && typeof collegePrograms === 'undefined') return;
 
     const storageVotesKey = 'lsff_college_vote_counts_v1';
@@ -2550,9 +2551,10 @@ const collegePrograms = [{"country":"United States","college":"Agnes Scott (GA)"
     try { existingVote = localStorage.getItem(storageUserVoteKey) || ''; } catch(e) {}
     if (existingVote) {
       select.value = existingVote;
-      select.disabled = true;
+      select.disabled = false;
       button.disabled = true;
-      message.textContent = `You have already voted for ${existingVote} on this browser.`;
+      clearButton.disabled = false;
+      message.textContent = `You have already voted for ${existingVote} on this browser. To vote for another team, click Clear my vote first.`;
     }
 
     form.addEventListener('submit', function(event){
@@ -2571,13 +2573,39 @@ const collegePrograms = [{"country":"United States","college":"Agnes Scott (GA)"
         localStorage.setItem(storageVotesKey, JSON.stringify(votes));
         localStorage.setItem(storageUserVoteKey, chosen);
         existingVote = chosen;
-        select.disabled = true;
+        select.disabled = false;
         button.disabled = true;
-        message.textContent = `Thank you! Your vote for ${chosen} has been recorded on this browser.`;
+        clearButton.disabled = false;
+        message.textContent = `Thank you! Your vote for ${chosen} has been recorded on this browser. Click Clear my vote if you want to change it.`;
       } catch(e) {
         message.textContent = 'Your browser could not save the vote. Please check your browser settings.';
       }
-      renderTopThree();
+      if (clearButton) {
+      clearButton.disabled = !existingVote;
+      clearButton.addEventListener('click', function(){
+        if (!existingVote) {
+          message.textContent = 'There is no saved vote to clear on this browser.';
+          return;
+        }
+        const previousVote = existingVote;
+        votes[previousVote] = Math.max(0, Number(votes[previousVote] || 0) - 1);
+        if (votes[previousVote] === 0) delete votes[previousVote];
+        try {
+          localStorage.setItem(storageVotesKey, JSON.stringify(votes));
+          localStorage.removeItem(storageUserVoteKey);
+          existingVote = '';
+          select.disabled = false;
+          button.disabled = false;
+          clearButton.disabled = true;
+          select.value = '';
+          message.textContent = 'Your vote was cleared on this browser. Select a team and vote again.';
+          renderTopThree();
+        } catch(e) {
+          message.textContent = 'The vote could not be cleared. Please check your browser settings.';
+        }
+      });
+    }
+    renderTopThree();
     });
     renderTopThree();
   }
