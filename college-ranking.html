@@ -2334,7 +2334,7 @@ button{ font-family: inherit; cursor: pointer; }
     <div class="section__head">
       <div class="kicker">FAN VOTE</div>
       <h2>Who do you think is the best team?</h2>
-      <p class="section__lede">Choose one college team from the list and cast your vote. The top three teams will appear below.</p>
+      <p class="section__lede">Select a college team from the list and cast your vote. The top five teams will appear below.</p>
     </div>
     <div class="vote-panel">
       <form id="collegeVoteForm" class="vote-form">
@@ -2344,11 +2344,11 @@ button{ font-family: inherit; cursor: pointer; }
           </select>
         </label>
         <button class="btn btn--red" type="submit" id="collegeVoteButton">Vote</button>
-        <p class="vote-message" id="collegeVoteMessage" role="status" aria-live="polite">Select a team to vote.</p>
+        <p class="vote-message" id="collegeVoteMessage" role="status" aria-live="polite">Choose your favorite college team and click Vote.</p>
       </form>
       <div class="vote-results">
-        <h3>Top 3 Most Voted Teams</h3>
-        <ol id="collegeVoteTopThree" class="vote-top-three">
+        <h3>Top 5 Most Voted Teams</h3>
+        <ol id="collegeVoteTopFive" class="vote-top-three">
           <li class="vote-empty">No votes yet. Be the first to vote!</li>
         </ol>
       </div>
@@ -2502,7 +2502,7 @@ const collegePrograms = [{"country":"United States","college":"Agnes Scott (GA)"
     const select = document.getElementById('collegeVoteSelect');
     const form = document.getElementById('collegeVoteForm');
     const message = document.getElementById('collegeVoteMessage');
-    const results = document.getElementById('collegeVoteTopThree');
+    const results = document.getElementById('collegeVoteTopFive');
     const button = document.getElementById('collegeVoteButton');
     if (!select || !form || !results || !Array.isArray(window.collegePrograms) && typeof collegePrograms === 'undefined') return;
 
@@ -2525,7 +2525,7 @@ const collegePrograms = [{"country":"United States","college":"Agnes Scott (GA)"
       const ranked = Object.entries(votes)
         .filter(([name,count]) => colleges.includes(name) && Number(count) > 0)
         .sort((a,b) => Number(b[1]) - Number(a[1]) || a[0].localeCompare(b[0]))
-        .slice(0,3);
+        .slice(0,5);
       if (!ranked.length) {
         const li = document.createElement('li');
         li.className = 'vote-empty';
@@ -2558,7 +2558,7 @@ const collegePrograms = [{"country":"United States","college":"Agnes Scott (GA)"
     form.addEventListener('submit', function(event){
       event.preventDefault();
       if (existingVote) {
-        message.textContent = `This browser has already voted for ${existingVote}.`;
+        message.textContent = `A vote has already been submitted from this browser for ${existingVote}.`;
         return;
       }
       const chosen = select.value;
