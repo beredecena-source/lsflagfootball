@@ -2160,6 +2160,25 @@ button{ font-family: inherit; cursor: pointer; }
 
 
 
+
+.vote-panel{max-width:860px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:16px;padding:28px;box-shadow:0 8px 24px rgba(0,20,73,.07)}
+.vote-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:end}
+.vote-form label{display:flex;flex-direction:column;gap:8px;font-weight:700;color:var(--navy)}
+.vote-form select{width:100%;min-height:48px;border:1px solid #cbd4df;border-radius:8px;padding:10px 12px;background:#fff;color:var(--ink);font:inherit}
+.vote-form .btn{min-height:48px}
+.vote-message{grid-column:1/-1;color:var(--slate);font-size:14px;min-height:22px}
+.vote-results{margin-top:26px;border-top:1px solid var(--border);padding-top:22px}
+.vote-results h3{font-size:22px;margin-bottom:14px}
+.vote-top-three{list-style:none;counter-reset:vote-rank;padding:0;margin:0;display:grid;gap:10px}
+.vote-top-three li{counter-increment:vote-rank;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 16px;background:var(--chalk);border:1px solid var(--border);border-radius:10px}
+.vote-top-three li::before{content:counter(vote-rank);display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--font-mono);font-weight:700}
+.vote-team{display:flex;align-items:center;gap:12px;flex:1;font-weight:700;color:var(--navy)}
+.vote-count{white-space:nowrap;font-family:var(--font-mono);font-weight:700;color:var(--red)}
+.vote-top-three .vote-empty{display:block;text-align:center;color:var(--slate);padding:20px}
+.vote-top-three .vote-empty::before{content:none}
+.vote-note{margin-top:18px;font-size:12.5px;color:var(--slate-light)}
+@media(max-width:620px){.vote-panel{padding:18px}.vote-form{grid-template-columns:1fr}.vote-form .btn{width:100%}.vote-top-three li{padding:12px}.vote-count{font-size:12px}}
+
 </style></head><body><header class="nav"><div class="container nav__inner">
 
 
@@ -2308,7 +2327,36 @@ button{ font-family: inherit; cursor: pointer; }
 
 
 
-</div></div></section><section class="section"><div class="container"><div class="section__head"><div class="kicker">COLLEGE RANKING</div><h2>Module in preparation</h2></div><div class="notice"><strong>Pending data:</strong> the supplied documents do not yet include a ranking methodology, college list, positions, individual statistics, or classification criteria. This page is structured to incorporate them without publishing unverified information.</div></div></section><section class="section section--alt"><div class="container"><div class="section__head"><div class="kicker">PLAYER DEVELOPMENT</div><h2>Available development foundation</h2></div><div class="info-grid"><div class="info-card"><h3>Player development</h3><p>The project assigns the Director of Athletics and Programs responsibility for curriculum, training standards, tournaments, and player development.</p></div><div class="info-card"><h3>Digital records</h3><p>SportsEngine serves as the master database for players, records, schedules, rosters, and payments.</p></div><div class="info-card"><h3>Upcoming information</h3><p>Once criteria, colleges, statistics, or profiles are defined, they can be incorporated into this module.</p></div></div></div></section><footer class="footer"><div class="container"><div class="footer__grid">
+</div>
+</div></section>
+<section class="section section--alt" id="college-voting">
+  <div class="container">
+    <div class="section__head">
+      <div class="kicker">FAN VOTE</div>
+      <h2>Who do you think is the best team?</h2>
+      <p class="section__lede">Choose one college team from the list and cast your vote. The top three teams will appear below.</p>
+    </div>
+    <div class="vote-panel">
+      <form id="collegeVoteForm" class="vote-form">
+        <label for="collegeVoteSelect">College team
+          <select id="collegeVoteSelect" required>
+            <option value="">Select a college team</option>
+          </select>
+        </label>
+        <button class="btn btn--red" type="submit" id="collegeVoteButton">Vote</button>
+        <p class="vote-message" id="collegeVoteMessage" role="status" aria-live="polite">Select a team to vote.</p>
+      </form>
+      <div class="vote-results">
+        <h3>Top 3 Most Voted Teams</h3>
+        <ol id="collegeVoteTopThree" class="vote-top-three">
+          <li class="vote-empty">No votes yet. Be the first to vote!</li>
+        </ol>
+      </div>
+      <p class="vote-note">Demo version: votes are saved in this browser only. To combine votes from all website visitors, connect this module to a shared database/backend.</p>
+    </div>
+  </div>
+</section>
+<section class="section"><div class="container"><div class="section__head"><div class="kicker">COLLEGE RANKING</div><h2>Module in preparation</h2></div><div class="notice"><strong>Pending data:</strong> the supplied documents do not yet include a ranking methodology, college list, positions, individual statistics, or classification criteria. This page is structured to incorporate them without publishing unverified information.</div></div></section><section class="section section--alt"><div class="container"><div class="section__head"><div class="kicker">PLAYER DEVELOPMENT</div><h2>Available development foundation</h2></div><div class="info-grid"><div class="info-card"><h3>Player development</h3><p>The project assigns the Director of Athletics and Programs responsibility for curriculum, training standards, tournaments, and player development.</p></div><div class="info-card"><h3>Digital records</h3><p>SportsEngine serves as the master database for players, records, schedules, rosters, and payments.</p></div><div class="info-card"><h3>Upcoming information</h3><p>Once criteria, colleges, statistics, or profiles are defined, they can be incorporated into this module.</p></div></div></div></section><footer class="footer"><div class="container"><div class="footer__grid">
 
 
 
@@ -2448,6 +2496,96 @@ const collegePrograms = [{"country":"United States","college":"Agnes Scott (GA)"
 
 
 </script>
+<script>
+(function(){
+  function initCollegeVoting(){
+    const select = document.getElementById('collegeVoteSelect');
+    const form = document.getElementById('collegeVoteForm');
+    const message = document.getElementById('collegeVoteMessage');
+    const results = document.getElementById('collegeVoteTopThree');
+    const button = document.getElementById('collegeVoteButton');
+    if (!select || !form || !results || !Array.isArray(window.collegePrograms) && typeof collegePrograms === 'undefined') return;
+
+    const storageVotesKey = 'lsff_college_vote_counts_v1';
+    const storageUserVoteKey = 'lsff_college_user_vote_v1';
+    let votes = {};
+    try { votes = JSON.parse(localStorage.getItem(storageVotesKey) || '{}') || {}; } catch(e) { votes = {}; }
+
+    const colleges = [...new Set(collegePrograms.map(item => (item.college || '').trim()).filter(Boolean))]
+      .sort((a,b)=>a.localeCompare(b));
+    colleges.forEach(name => {
+      const option = document.createElement('option');
+      option.value = name;
+      option.textContent = name;
+      select.appendChild(option);
+    });
+
+    function renderTopThree(){
+      results.replaceChildren();
+      const ranked = Object.entries(votes)
+        .filter(([name,count]) => colleges.includes(name) && Number(count) > 0)
+        .sort((a,b) => Number(b[1]) - Number(a[1]) || a[0].localeCompare(b[0]))
+        .slice(0,3);
+      if (!ranked.length) {
+        const li = document.createElement('li');
+        li.className = 'vote-empty';
+        li.textContent = 'No votes yet. Be the first to vote!';
+        results.appendChild(li);
+        return;
+      }
+      ranked.forEach(([name,count]) => {
+        const li = document.createElement('li');
+        const team = document.createElement('span');
+        team.className = 'vote-team';
+        team.textContent = name;
+        const total = document.createElement('span');
+        total.className = 'vote-count';
+        total.textContent = `${Number(count)} vote${Number(count) === 1 ? '' : 's'}`;
+        li.append(team,total);
+        results.appendChild(li);
+      });
+    }
+
+    let existingVote = '';
+    try { existingVote = localStorage.getItem(storageUserVoteKey) || ''; } catch(e) {}
+    if (existingVote) {
+      select.value = existingVote;
+      select.disabled = true;
+      button.disabled = true;
+      message.textContent = `You have already voted for ${existingVote} on this browser.`;
+    }
+
+    form.addEventListener('submit', function(event){
+      event.preventDefault();
+      if (existingVote) {
+        message.textContent = `This browser has already voted for ${existingVote}.`;
+        return;
+      }
+      const chosen = select.value;
+      if (!chosen || !colleges.includes(chosen)) {
+        message.textContent = 'Please select a college team before voting.';
+        return;
+      }
+      votes[chosen] = Number(votes[chosen] || 0) + 1;
+      try {
+        localStorage.setItem(storageVotesKey, JSON.stringify(votes));
+        localStorage.setItem(storageUserVoteKey, chosen);
+        existingVote = chosen;
+        select.disabled = true;
+        button.disabled = true;
+        message.textContent = `Thank you! Your vote for ${chosen} has been recorded on this browser.`;
+      } catch(e) {
+        message.textContent = 'Your browser could not save the vote. Please check your browser settings.';
+      }
+      renderTopThree();
+    });
+    renderTopThree();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initCollegeVoting);
+  else initCollegeVoting();
+})();
+</script>
+
 
 
 
